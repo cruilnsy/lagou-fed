@@ -1,20 +1,25 @@
-import { action, computed, observable } from 'mobx';
+import { action, computed, observable, runInAction } from 'mobx';
 
 class AppleStore {
   @observable apples = [];
   @observable qty = 0;
   @observable weight = 0;
   @observable eatenWeight = 0;
+  @observable isPicking = false;
 
   @action.bound pickApple () {
+    this.isPicking = true;
     this.qty = this.qty + 1;
-    const apple = {
-      id: this.qty,
-      weight: Math.floor(200 + Math.random() * 50),
-      isEaten: false
-    }
-    this.weight += apple.weight;
-    this.apples.push(apple);
+    setTimeout(() => {
+      const apple = {
+        id: this.qty,
+        weight: Math.floor(200 + Math.random() * 50),
+        isEaten: false
+      }
+      this.weight += apple.weight;
+      this.apples.push(apple);
+      this.isPicking = false;
+    }, 1000);
   }
 
   @action.bound eatApple (id) {

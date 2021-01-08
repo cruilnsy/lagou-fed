@@ -6,7 +6,7 @@ import { inject, observer } from 'mobx-react';
 @observer
 class AppleBasket extends Component {
   render () {
-    const { pickApple, numberOfLeftover, numberOfEaten, weightOfLeftover, eatenWeight } = this.props.store;
+    const { pickApple, numberOfLeftover, numberOfEaten, weightOfLeftover, eatenWeight, isPicking } = this.props.store;
 
     return (
       <div className="appleBasket">
@@ -25,7 +25,7 @@ class AppleBasket extends Component {
           <AppleList />
         </div>
         <div className="btn-div">
-          <button onClick={ pickApple }>采集</button>
+          <button className={isPicking ? 'disabled' : ''} onClick={ pickApple }>采集</button>
         </div>
       </div>
     );
